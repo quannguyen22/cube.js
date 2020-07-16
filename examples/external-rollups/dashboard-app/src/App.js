@@ -197,7 +197,7 @@ const lineRender = ({ resultSet, yFormatter }) => (
 
 const API_HOST = process.env.NODE_ENV === 'production' ? "" : "http://localhost:4000";
 const cubejsApi = cubejs(
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Njc3MzQwMDR9.t9QdhSxC4vuJUOzH87pmgykjastR5fhbmkE7UP7tr6k",
+  "",
   {
     apiUrl: API_HOST + "/cubejs-api/v1"
   }

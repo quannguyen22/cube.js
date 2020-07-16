@@ -1,5 +1,6 @@
 const CubejsServerCore = require("@cubejs-backend/server-core");
 const MySQLDriver = require('@cubejs-backend/mysql-driver');
+const BigQueryDriver = require('@cubejs-backend/bigquery-driver');
 const express = require('express')
 const app = express()
 const path = require('path');
@@ -12,13 +13,17 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const CubejsServer = new CubejsServerCore({
+  dbType: 'bigquery',
+  driverFactory: () => new BigQueryDriver(),
+  apiSecret: '1111',
   preAggregationsSchema: () => process.env.CUBEJS_PREAGGREGATIONS_SCHEMA || 'stb_pre_aggregations',
   externalDbType: 'mysql',
   externalDriverFactory: () => new MySQLDriver({
     host: process.env.CUBEJS_EXT_DB_HOST,
     database: process.env.CUBEJS_EXT_DB_NAME,
     user: process.env.CUBEJS_EXT_DB_USER,
-    password: process.env.CUBEJS_EXT_DB_PASS.toString()
+    password: process.env.CUBEJS_EXT_DB_PASS.toString(),
+    port: 3307
   })
 });
 
